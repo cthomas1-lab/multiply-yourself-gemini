@@ -2,7 +2,7 @@
 
 ---
 
-# 🐍 Python uv & uvx Setup
+# 🐍 Python uv & uvx Setup (Fedora)
 
 `uv` is an extremely fast Python package installer and resolver (written in Rust). `uvx` is like `npx` but for Python—it runs Python tools in isolated environments.
 
@@ -10,23 +10,15 @@
 
 ## Installation
 
-### macOS
-
-```bash
-# Install uv via Homebrew
-brew install uv
-```
-
-### Windows (WSL/Ubuntu)
-
-> ⚠️ **Verify you're in WSL first!** Check the bottom-left of Windsurf shows "WSL: Ubuntu"
+This command will install `uv` on your Fedora system using the official installer script.
 
 ```bash
 # Install uv via the official installer
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
 # Add to PATH (restart terminal or run this)
-source $HOME/.local/bin/env
+echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc
 ```
 
 ---
@@ -45,7 +37,7 @@ Both commands should return version numbers.
 ## Test uvx
 
 ```bash
-uvx cowsay "Hello from Python!"
+uvx cowsay -t "Hello from Python!"
 ```
 
 This downloads and runs the Python `cowsay` package in an isolated environment.
@@ -75,14 +67,9 @@ uvx --with requests httpie https://api.github.com
 
 ---
 
-## Why This Matters for Windsurf
+## Why This Matters for Gemini
 
-Many MCP (Model Context Protocol) servers are distributed as Python packages. You'll use `uvx` to run them without managing virtual environments manually.
-
-Example:
-```bash
-uvx mcp-server-fetch
-```
+You can use `uvx` to run Python-based tools that extend Gemini's functionality without polluting your global Python environment.
 
 ---
 
@@ -100,9 +87,11 @@ uvx mcp-server-fetch
 ## Troubleshooting
 
 **`uvx` command not found:**
+
+If you get a "command not found" error, make sure that `~/.local/bin` is in your `PATH`. You can add it to your `~/.bashrc` with:
 ```bash
-brew reinstall uv
-# Restart your terminal
+echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc
 ```
 
 **Cache issues:**
@@ -115,7 +104,7 @@ uv cache clean
 ## ✅ Verification
 
 ```bash
-uv --version && uvx --version && uvx cowsay "Ready!"
+uv --version && uvx --version && uvx cowsay -t "Ready!"
 ```
 
 ---

@@ -2,7 +2,7 @@
 
 ---
 
-# 📦 Node.js & npx Setup
+# 📦 Node.js & npx Setup (Fedora)
 
 `npx` is a tool that comes with Node.js/npm. It lets you run Node.js packages without installing them globally.
 
@@ -10,21 +10,14 @@
 
 ## Installation
 
-### macOS
+These commands will install Node.js and npm on your Fedora system.
 
 ```bash
-# Install Node.js via Homebrew
-brew install node
-```
+# Update your system
+sudo dnf update -y
 
-### Windows (WSL/Ubuntu)
-
-> ⚠️ **Verify you're in WSL first!** Check the bottom-left of Windsurf shows "WSL: Ubuntu"
-
-```bash
-# Install Node.js via NodeSource repository
-curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
-sudo apt install -y nodejs
+# Install Node.js and npm
+sudo dnf install nodejs -y
 ```
 
 ---
@@ -74,13 +67,13 @@ npx https://gist.github.com/some-gist
 
 ---
 
-## Why This Matters for Windsurf
+## Why This Matters for Gemini
 
-Many MCP (Model Context Protocol) servers are distributed as npm packages. You'll use `npx` to run them without cluttering your global npm installation.
+Some tools and libraries used with Gemini might be distributed as npm packages. You'll use `npx` to run them without cluttering your global npm installation.
 
 Example:
 ```bash
-npx @anthropic/mcp-server-fetch
+npx some-gemini-related-tool
 ```
 
 ---
@@ -88,20 +81,14 @@ npx @anthropic/mcp-server-fetch
 ## Troubleshooting
 
 **`npx` command not found:**
+
 ```bash
-brew reinstall node
+sudo dnf install nodejs -y
 # Restart your terminal
 ```
 
 **Permission errors:**
-```bash
-# Check npm prefix
-npm config get prefix
-
-# Should be something like /opt/homebrew or /usr/local
-# If it's in your home directory with permission issues, reset it:
-npm config set prefix /opt/homebrew
-```
+If you encounter permission errors with npm, it's often best to use a Node.js version manager like `nvm` or ensure your npm prefix is set to a user-writable directory. However, for a basic system-wide installation on Fedora, the `dnf` installation should handle permissions correctly.
 
 ---
 
